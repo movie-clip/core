@@ -6,8 +6,6 @@ namespace Core.UnityUtils.Loom
 {
     public class Loom : MonoBehaviour
     {
-        private static int _maxThreads = 2;
-
         private static Loom _current;
         private static bool _initialized;
 
