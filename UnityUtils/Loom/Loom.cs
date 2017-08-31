@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.UnityUtils
+namespace Core.UnityUtils.Loom
 {
     public class Loom : MonoBehaviour
     {

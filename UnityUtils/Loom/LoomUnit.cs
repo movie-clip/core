@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-namespace Core.UnityUtils
+namespace Core.UnityUtils.Loom
 {
     public class LoomUnit
     {

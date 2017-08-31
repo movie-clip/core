@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Utils
+namespace Core.UnityUtils
 {
     public class CoroutineHelper : MonoBehaviour
     {
