@@ -1,4 +1,5 @@
 ﻿using Core.ResourceManager;
+using Game.Data;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,11 +80,17 @@ namespace Core.ViewManager
             }
         }
         
-        public void RegisterView(string viewId, string layerId, string section = null)
+        public void RegisterView(string viewId, string layerId)
         {
-            if (section == null)
+            string section = "Windows";
+
+            if (layerId == LayerNames.ScreenLayer)
             {
-                section = "Windows";
+                section = "Screens";
+            }
+            else if (layerId == LayerNames.ThreeDLayer)
+            {
+                section = "GameView";
             }
 
             _viewDictionary[viewId] = new ViewStruct(layerId, section);
