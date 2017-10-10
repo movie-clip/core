@@ -13,9 +13,15 @@ namespace Core.ResourceManager
             return _map.ContainsKey(viewId);
         }
 
-        public static void SetupResourcesCache(string viewId, string sectionId)
+        public static void SetupGuiResourcesCache(string viewId, string sectionId)
         {
             var go = Resources.Load<GameObject>("Gui/" + sectionId + "/" + viewId);
+            _map.Add(viewId, go);
+        }
+
+        public static void SetupResourcesCache(string viewId, string sectionId)
+        {
+            var go = Resources.Load<GameObject>(sectionId + "/" + viewId);
             _map.Add(viewId, go);
         }
 

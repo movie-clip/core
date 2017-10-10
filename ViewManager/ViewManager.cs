@@ -127,7 +127,7 @@ namespace Core.ViewManager
             string section = _viewDictionary[viewId].SectionId;
             if (!ResourcesCache.IsResourceLoaded(viewId))
             {
-                ResourcesCache.SetupResourcesCache(viewId, section);
+                ResourcesCache.SetupGuiResourcesCache(viewId, section);
             }
             
             var view = Instantiate(ResourcesCache.GetObject<BaseView>(section, viewId));
