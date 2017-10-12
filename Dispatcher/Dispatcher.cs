@@ -7,8 +7,9 @@ namespace Core.Dispatcher
     {
         public Dictionary<string, List<Action>> _map = new Dictionary<string, List<Action>>();
 
-        public void AddListener(string eventId, Action callback)
+        public void AddListener(Enum enumName, Action callback)
         {
+            string eventId = enumName.GetType() + enumName.ToString();
             if (!_map.ContainsKey(eventId))
             {
                 _map.Add(eventId, new List<Action>());
@@ -17,8 +18,9 @@ namespace Core.Dispatcher
             _map[eventId].Add(callback);
         }
         
-        public void RemoveListener(string eventId, Action callback)
+        public void RemoveListener(Enum enumName, Action callback)
         {
+            string eventId = enumName.GetType() + enumName.ToString();
             if (!_map.ContainsKey(eventId))
             {
                 return;
@@ -26,9 +28,10 @@ namespace Core.Dispatcher
 
             _map[eventId].Remove(callback);
         }
-
-        public void Dispatch(string eventId)
+        
+        public void Dispatch(Enum enumName)
         {
+            string eventId = enumName.GetType() + enumName.ToString();
             if (!_map.ContainsKey(eventId))
             {
                 return;
@@ -37,7 +40,7 @@ namespace Core.Dispatcher
             var actions = _map[eventId];
             for (int i = 0; i < actions.Count; i++)
             {
-                if(actions[i] != null)
+                if (actions[i] != null)
                 {
                     actions[i]();
                 }
