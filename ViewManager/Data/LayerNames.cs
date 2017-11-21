@@ -5,6 +5,6 @@ namespace Core.ViewManager.Data
     {
         public const string ScreenLayer = "screen_layer";
         public const string ThreeDLayer = "3d_layer";
-        public const string WindowsLayer = "window_layer";
+        public const string WindowLayer = "window_layer";
     }
 }
