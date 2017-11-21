@@ -1,5 +1,5 @@
 ﻿using Core.ResourceManager;
-using Game.Data;
+using Core.ViewManager.Data;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
