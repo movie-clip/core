@@ -1,39 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Gui.Config;
+using Core.ViewManager;
 using UnityEngine;
 
 namespace Core.ResourceManager
 {
-    public class ResourcesCache
+    public static class ResourcesCache
     {
-        private static Dictionary<string, GameObject> _map = new Dictionary<string, GameObject>();
+        private const string UiConfigPath = "Configs/UIConfig";
+        private static Dictionary<string, BaseView> _map = new Dictionary<string, BaseView>();
 
-        public static bool IsResourceLoaded(string viewId)
+        private static UIConfig _uiConfig;
+        
+        private static void Initialize()
         {
-            return _map.ContainsKey(viewId);
-        }
-
-        public static void SetupGuiResourcesCache(string viewId, string sectionId)
-        {
-            var go = Resources.Load<GameObject>("Gui/" + sectionId + "/" + viewId);
-            _map.Add(viewId, go);
-        }
-
-        public static void SetupResourcesCache(string viewId, string sectionId)
-        {
-            var go = Resources.Load<GameObject>(sectionId + "/" + viewId);
-            _map.Add(viewId, go);
-        }
-
-        public static T GetObject<T>(string section, string viewId)
-        {
-            if(!_map.ContainsKey(viewId))
+            if (_uiConfig == null)
             {
-                throw new Exception("[ResourcesCache] Can't find view with such id " + viewId);
+                _uiConfig = Resources.Load<UIConfig>(UiConfigPath);
+                
+                for (int i = 0; i < _uiConfig.Views.Count; i++)
+                {
+                    _map.Add(_uiConfig.Views[i].Id, _uiConfig.Views[i].View);
+                }
             }
+        }
 
-            var go = _map[viewId];
-            return go.GetComponent<T>();
+        public static BaseView GetViewById(string viewId)
+        {
+            Initialize();
+            
+            if (!_map.ContainsKey(viewId))
+            {
+                Debug.LogError("No view found with Id: " + viewId);
+                return null;
+            }
+            
+            return _map[viewId];
         }
     }
 }
