@@ -39,7 +39,7 @@ namespace Core.ViewManager
         {
             return SetView(viewId, GetLayerByViewId(viewId), options);
         }
-
+        
         private BaseView SetView(string viewId, ViewLayer layer, object options = null)
         {
             if (layer.Current == null)
