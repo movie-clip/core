@@ -9,6 +9,7 @@ namespace Core.ResourceManager
     public static class ResourcesCache
     {
         private const string UiConfigPath = "Configs/UIConfig";
+        
         private static Dictionary<string, BaseView> _map = new Dictionary<string, BaseView>();
 
         private static UIConfig _uiConfig;
@@ -18,6 +19,11 @@ namespace Core.ResourceManager
             if (_uiConfig == null)
             {
                 _uiConfig = Resources.Load<UIConfig>(UiConfigPath);
+                if (_uiConfig == null)
+                {
+                    Debug.LogError("No UIConfig by path: " + UiConfigPath);
+                    return;
+                }
                 
                 for (int i = 0; i < _uiConfig.Views.Count; i++)
                 {
@@ -37,6 +43,12 @@ namespace Core.ResourceManager
             }
             
             return _map[viewId];
+        }
+
+        public static T GetConfig<T>(string path) where T : UnityEngine.Object
+        {
+            T result = Resources.Load<T>(path);
+            return result;
         }
     }
 }
