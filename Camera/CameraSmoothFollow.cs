@@ -4,8 +4,9 @@ namespace Core.Camera
 {
     public class CameraSmoothFollow : BaseMonoBehaviour
     {
+        public bool UseFixedUpdate = false;
+        
         public float smoothDampTime = 0.2f;
-        public float verticalSmoothDampTime = 0.3f;
 
         public Vector3 cameraOffset;
 
@@ -13,7 +14,6 @@ namespace Core.Camera
         public Vector3 _focusPosition;
 
         private Vector3 _smoothDampVelocity;
-        private Vector3 _verticalSmoothDampVelocity;
 
         private UnityEngine.Camera _camera;
 
@@ -40,6 +40,21 @@ namespace Core.Camera
 
         public void FixedUpdate()
         {
+            if (!UseFixedUpdate)
+            {
+                return;
+            }
+            
+            UpdateCameraPosition();
+        }
+        
+        public void Update()
+        {
+            if (UseFixedUpdate)
+            {
+                return;
+            }
+            
             UpdateCameraPosition();
         }
 
@@ -48,7 +63,6 @@ namespace Core.Camera
             if (_target != null)
             {
                 _focusPosition = _target.position;
-                return;
             }
             
             CachedTransform.position = Vector3.SmoothDamp(CachedTransform.position, _focusPosition + cameraOffset, ref _smoothDampVelocity, smoothDampTime);
