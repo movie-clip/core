@@ -16,7 +16,7 @@ namespace Core.ViewManager
         }
     }
 
-    public class ViewManager : SingletonMonoBehaviour<ViewManager>, IViewManager
+    public class ViewManager : MonoSingleton<ViewManager>, IViewManager
     {
         [SerializeField]
         private List<ViewLayer> _layers;
@@ -24,7 +24,7 @@ namespace Core.ViewManager
         private Dictionary<string, ViewLayer> _uiLayersDict;
         private Dictionary<string, ViewStruct> _viewDictionary;
 
-        public void Init()
+        protected override void Init()
         {
             _uiLayersDict = new Dictionary<string, ViewLayer>();
             _viewDictionary = new Dictionary<string, ViewStruct>();

@@ -14,7 +14,7 @@ namespace Core.UnityUtils
         void OnUpdate();
     }
 
-    public class UpdateNotifier : SingletonMonoBehaviour<UpdateNotifier>
+    public class UpdateNotifier : MonoSingleton<UpdateNotifier>
     {
         private static long _lastTickEventHappened = -1;
 
@@ -53,11 +53,9 @@ namespace Core.UnityUtils
             updateHandler.IsUpdating = false;
         }
 
-        /// <summary>
-        /// Calls every frame while my gameObject is active
-        /// </summary>
-        protected void Update()
+        protected override void Update()
         {
+            base.Update();
             CallUpdateHappened();
         }
 

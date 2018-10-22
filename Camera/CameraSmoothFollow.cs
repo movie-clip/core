@@ -22,9 +22,8 @@ namespace Core.Camera
             get { return _camera; }
         }
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
             _camera = CachedTransform.GetComponent<UnityEngine.Camera>();
         }
 
