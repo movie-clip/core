@@ -7,8 +7,7 @@ namespace Core
         private float _scheduleUpdateInterval;
         private float _scheduleUpdateTime;
 
-        [SerializeField]
-        private bool _scheduledUpdate;
+        [SerializeField] private bool _scheduledUpdate;
         private bool _scheduleRepeat;
 
         protected void UnscheduleUpdate()
@@ -24,7 +23,7 @@ namespace Core
             _scheduleUpdateTime = Time.time + _scheduleUpdateInterval;
         }
 
-        protected virtual void Update()
+        protected override void Update()
         {
             if (_scheduledUpdate && Time.time > _scheduleUpdateTime)
             {
@@ -41,8 +40,6 @@ namespace Core
             }
         }
 
-        protected virtual void OnScheduledUpdate()
-        {
-        }
+        protected virtual void OnScheduledUpdate() { }
     }
 }

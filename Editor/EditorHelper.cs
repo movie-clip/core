@@ -30,11 +30,15 @@ namespace Core.Editor
         public static string GetSelectedObjectPath()
         {
             if (Selection.activeObject == null)
+            {
                 return "Assets";
+            }
 
             var path = AssetDatabase.GetAssetPath(Selection.activeObject);
             if (string.IsNullOrEmpty(path))
+            {
                 return "Assets";
+            }
 
             var dir = Path.GetFullPath(path);
             return dir;

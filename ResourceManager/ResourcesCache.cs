@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Core.Gui.Config;
-using Core.ViewManager;
+﻿using System.Collections.Generic;
+using Core.Configs;
+using Core.UI;
 using UnityEngine;
 
 namespace Core.ResourceManager
@@ -9,22 +8,25 @@ namespace Core.ResourceManager
     public static class ResourcesCache
     {
         private const string UiConfigPath = "Configs/UIConfig";
-        
-        private static Dictionary<string, BaseView> _map = new Dictionary<string, BaseView>();
+        private const string AssetConfigPath = "Configs/AssetConfig";
+
+        private static readonly Dictionary<string, BaseView> _map = new ();
 
         private static UIConfig _uiConfig;
+        private static AssetConfig _assetConfig;
         
         private static void Initialize()
         {
             if (_uiConfig == null)
             {
+                _assetConfig = Resources.Load<AssetConfig>(AssetConfigPath);
                 _uiConfig = Resources.Load<UIConfig>(UiConfigPath);
                 if (_uiConfig == null)
                 {
                     Debug.LogError("No UIConfig by path: " + UiConfigPath);
                     return;
                 }
-                
+
                 for (int i = 0; i < _uiConfig.Views.Count; i++)
                 {
                     _map.Add(_uiConfig.Views[i].Id, _uiConfig.Views[i].View);
@@ -35,20 +37,19 @@ namespace Core.ResourceManager
         public static BaseView GetViewById(string viewId)
         {
             Initialize();
-            
+
             if (!_map.ContainsKey(viewId))
             {
                 Debug.LogError("No view found with Id: " + viewId);
                 return null;
             }
-            
+
             return _map[viewId];
         }
 
-        public static T GetConfig<T>(string path) where T : UnityEngine.Object
+        public static AssetConfig AssetConfig
         {
-            T result = Resources.Load<T>(path);
-            return result;
+            get { return _assetConfig; }
         }
     }
 }

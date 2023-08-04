@@ -1,6 +1,5 @@
-﻿using System.IO;
-using Core.Gui.Config;
-using Core.ViewManager;
+﻿using Core.Configs;
+using Core.UI;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,19 +8,23 @@ namespace Core.Editor
     [CustomEditor(typeof(UIConfig))]
     public class UIConfigEditor : UnityEditor.Editor
     {
-        [SerializeField]
-        private string _path;
-        
+        [SerializeField] private string _path;
+
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
             UIConfig config = (UIConfig) target;
             _path = config.PathToAssets;
-            
+
             GUILayout.BeginHorizontal();
             {
-                EditorGUILayout.LabelField(_path); 
-                
+                EditorGUILayout.LabelField(_path);
+
+                if (GUILayout.Button("Update"))
+                {
+                    UpdateAssets(config);
+                }
+
                 if (GUILayout.Button("Choose path"))
                 {
                     ChoosePath(config);
@@ -37,28 +40,32 @@ namespace Core.Editor
             {
                 return;
             }
-            
+
             _path = folderPath.Replace(Application.dataPath, "Assets");
-            
-            
+
+            UpdateAssets(config);
+        }
+
+        private void UpdateAssets(UIConfig config)
+        {
             config.Views.Clear();
-            
-            string[] assets = AssetDatabase.FindAssets("t: prefab", new []{_path});
-            
+
+            string[] assets = AssetDatabase.FindAssets("t: prefab", new[] {_path});
+
             for (int i = 0; i < assets.Length; i++)
             {
                 string path = AssetDatabase.GUIDToAssetPath(assets[i]);
-                BaseView view  = AssetDatabase.LoadAssetAtPath<BaseView>(path);
+                BaseView view = AssetDatabase.LoadAssetAtPath<BaseView>(path);
                 if (view == null)
                 {
                     continue;
                 }
-                
+
                 config.Views.Add(new ViewConfig(view));
             }
 
             config.PathToAssets = _path;
-            
+
             EditorUtility.SetDirty(target);
             AssetDatabase.SaveAssets();
         }

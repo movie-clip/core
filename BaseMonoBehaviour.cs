@@ -4,41 +4,29 @@ namespace Core
 {
     public abstract class BaseMonoBehaviour : MonoBehaviour
     {
-        private Transform _transform;
-        private bool _released;
+        private bool _release;
+        
+        protected virtual void Awake() { }
+        
+        protected virtual void Start() { }
 
-        public Transform CachedTransform
-        {
-            get
-            {
-                if (_transform == null)
-                    _transform = this.transform;
-
-                return _transform;
-            }
-        }
-
-        protected virtual void Start()
-        {
-        }
+        protected virtual void Update() { }
 
         private void OnApplicationQuit()
         {
-            _released = true;
+            _release = true;
         }
 
         protected virtual void OnDestroy()
         {
-            if (!_released)
+            if (!_release)
             {
                 OnReleaseResources();
             }
-
-            _released = true;
+            
+            _release = true;
         }
 
-        protected virtual void OnReleaseResources()
-        {
-        }
+        protected virtual void OnReleaseResources() { } 
     }
 }
