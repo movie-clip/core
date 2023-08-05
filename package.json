@@ -1,0 +1,26 @@
+{
+  "name": "com.dev.core",
+  "version": "1.0.0",
+  "displayName": "Core",
+  "description": "Core package",
+  "unity": "2019.1",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  "dependencies": {},
+ "keywords": [
+    "core"
+  ],
+  "author": {
+    "name": "Anton Ametov",
+    "email": "antonametov88@gmail.com",
+    "url": "https://www.unity3d.com"
+  },
+  "samples": [
+        {
+            "displayName": "Integration Sample",
+            "description": "Contains sample shaders for the High Definition render pipeline",
+            "path": "Samples~/IntegrationSample"
+        }
+    ]
+}
