@@ -18,8 +18,6 @@ namespace Core.Installers
             
             base.RunInternal();
         }
-
-        
         private IEnumerable<T> GetEnumerableOfType<T>() where T : BaseInstaller
         {
             List<T> objects = new List<T>();

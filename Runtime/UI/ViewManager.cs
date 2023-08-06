@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core.ResourceManager;
 using UnityEngine;
+using Zenject;
 
 namespace Core.UI
 {
@@ -112,8 +113,9 @@ namespace Core.UI
             {
                 throw new Exception("Can't find view with such id " + viewId);
             }
-
-            var view = Instantiate(ResourcesCache.GetViewById(viewId), layer.transform, false);
+            
+            // var view = Instantiate(ResourcesCache.GetViewById(viewId), layer.transform, false);
+            var view = Instantiate(ResourcesCache.GetViewById(viewId), layer.transform);
             view.Layer = layer;
             view.name = viewId;
             view.gameObject.SetActive(true);

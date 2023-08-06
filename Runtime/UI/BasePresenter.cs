@@ -20,8 +20,7 @@ namespace Core.UI
 
         public override void Start()
         {
-            View = ViewManager.Instance.SetView(ViewId) as T;
-            View.MessageHub = SignalBus;
+            View =  ViewManager.Instance.SetView(ViewId) as T;
             OnStart();
         }
         

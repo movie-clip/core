@@ -24,7 +24,6 @@ namespace Core.States
         public void ApplyStrategy<T>() where T : BaseState
         {
             _currentStrategy?.Finish();
-            
             _currentStrategy = _diContainer.Instantiate<T>();
             _currentStrategy.Start();
         }
