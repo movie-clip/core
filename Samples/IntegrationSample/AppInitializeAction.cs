@@ -1,21 +1,13 @@
-﻿using System;
-using Core.Utils.ActionUtils.Actions;
+﻿using Core.Utils.ActionUtils.Actions;
 
 namespace Samples.IntegrationSample
 {
-    public class AppInitializeAction : IAction
+    public class AppInitializeAction : BaseAction
     {
-        public event Action<string> OnComplete;
-        public event Action<string> OnFail;
-        
-        public void Execute()
+        public override void Execute()
         {
-            OnComplete?.Invoke("Complete");
-        }
-
-        public void Destroy()
-        {
-            
+            base.Execute();
+            Complete();
         }
     }
 }

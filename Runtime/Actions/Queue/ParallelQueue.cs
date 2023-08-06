@@ -11,7 +11,6 @@ namespace Core.Utils.ActionUtils.Actions
 
         private readonly List<IAction> _actions;
 
-        private int _currentIndex;
         private bool _isPaused;
         
         private bool _isDestroyed;
@@ -33,7 +32,6 @@ namespace Core.Utils.ActionUtils.Actions
 
         public void Start()
         {
-            _currentIndex = 0;
             ExecuteAction();
         }
 
